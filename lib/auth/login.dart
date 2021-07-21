@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swcap/components/buttons/text_button.dart';
+import 'package:swcap/components/inputs/custom_input.dart';
 import 'package:swcap/config/app_config.dart';
+import 'package:swcap/pages/homepage.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({Key key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -25,6 +27,9 @@ class _LoginState extends State<Login> {
       _isLoading = !_isLoading;
     });
   }
+
+  CustomInput _username = CustomInput(showHint: false, isPassword: false, showLabel: true, labelText: "Username",);
+  CustomInput _password = CustomInput(showHint: false, isPassword: true, showLabel: true, labelText: "Password",);
 
   @override
   Widget build(BuildContext context) {
@@ -73,30 +78,16 @@ class _LoginState extends State<Login> {
                       vertical: 10,
                       horizontal: 10
                     ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Username",
-                      ),
-                    ),
+                    child: _username,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 10,
-                    ),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                      ),
-                      obscureText: true,
-                    ),
-                  ),
+                  _password,
                   SizedBox(height: 20,),
                   Container(
                     child: CustomTextButton(
                       onPressed: () {
                         print("Loggin in");
                         _loginProcess();
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
                       },
                       isLoading: _isLoading,
                       title: "Login",

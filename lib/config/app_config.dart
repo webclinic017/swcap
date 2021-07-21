@@ -9,7 +9,7 @@ class AppConfig {
 
   static Color kDarkColor = Color(0xff212121);
   static Color kMediumDarkColor = Color(0xff484848);
-  static Color kDeepDarkColor = Color(0xff00000);
+  static Color kDeepDarkColor = Color(0xff000000);
 
 
   static Color kLightColor = Color(0xffffffff);
@@ -41,7 +41,7 @@ class AppConfig {
       scaffoldBackgroundColor: kDarkColor,
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: GoogleFonts.poppins(
-          color: Colors.white
+          color: Colors.white,
         )
       ),
       textTheme: TextTheme(

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "750743109345",
+    "project_id": "swcap-988f8",
+    "storage_bucket": "swcap-988f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750743109345:android:a1158a5def3e84b17a41a0",
+        "android_client_info": {
+          "package_name": "com.example.swcap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750743109345-sbp8pondmsi6tehcglsfrlpa81jvuvpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ0bSJOxD6oOJRTLRG1xSmQc6gewPsOHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750743109345-sbp8pondmsi6tehcglsfrlpa81jvuvpo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
