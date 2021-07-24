@@ -17,6 +17,8 @@ class CustomTextButton extends StatelessWidget {
       child: Text(title),
       textColor: Colors.white,
       elevation: 5,
-    ) : CircularProgressIndicator();
+    ) : Container(
+      child: Center(child: CircularProgressIndicator(),),
+    );
   }
 }

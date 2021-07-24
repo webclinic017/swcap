@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:swcap/notifier/theme_notifier.dart';
 
 
 class AppConfig {
@@ -42,6 +41,9 @@ class AppConfig {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: GoogleFonts.poppins(
           color: Colors.white,
+        ),
+        hintStyle: GoogleFonts.poppins(
+          color: Colors.white.withOpacity(0.6)
         )
       ),
       textTheme: TextTheme(
