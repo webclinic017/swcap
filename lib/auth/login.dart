@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swcap/api/auth_api.dart';
+import 'package:swcap/api/user_api.dart';
 import 'package:swcap/components/buttons/text_button.dart';
 import 'package:swcap/components/inputs/custom_input.dart';
 import 'package:swcap/config/app_config.dart';
@@ -56,6 +58,11 @@ class _LoginState extends State<Login> {
       final response = await AuthApi.userLogin(_usernameController.text, _passwordController.text);
       print(response.status);
       if(response.status){
+
+        final res = await UserApi.updateUser(response.data.id, jsonEncode({
+          "is_loggedin" : 1
+        }));
+
         UserConfig.setUserSession(response);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
       }else{

@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SWCAP',
+      title: 'Swing',
       theme: AppConfig.darkTheme,
       home: Login(),
       darkTheme: AppConfig.darkTheme,

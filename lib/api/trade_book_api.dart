@@ -87,4 +87,45 @@ class TradeBookApi {
 
   }
 
+  static Future<GlobalModel> updateTradeBook(tradeID , tradeData) async {
+
+    final client = http.Client();
+    GlobalModel thisResponse = GlobalModel();
+
+    try{
+
+      final response = await client.post(Uri.parse(ApiUrl.updateTradeBookApiUrl) , body: {
+        "trade_id" : tradeID,
+        "trade_data" : tradeData
+      });
+
+      if(response.statusCode == 200){
+
+        if(jsonDecode(response.body)['status']){
+
+          thisResponse = globalModelFromJson(response.body);
+
+        }else{
+          thisResponse = GlobalModel(
+              status:  false,
+              data:  false
+          );
+        }
+
+        return thisResponse;
+
+      }else{
+        print("Wrong Status Code : ${response.statusCode}");
+      }
+
+    }catch(e){
+      print(e);
+    }finally{
+      client.close();
+    }
+
+    return thisResponse;
+
+  }
+
 }

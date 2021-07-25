@@ -10,5 +10,9 @@ class ApiUrl {
   static String addWatchListApiUrl = base_url + '/addWatchlist';
   static String createTradeBook = base_url + '/createTradeBook';
   static String createOrderBook = base_url + '/createOrderBook';
+  static String updateUserApiUrl = base_url + '/userUpdate';
+  static String fetchUserApiUrl = base_url + '/getUserData';
+  static String updateTradeBookApiUrl = base_url + '/updateTradeBook';
+  static String addPayoutRequestApiUrl = base_url + '/addPayoutRequest';
 
 }

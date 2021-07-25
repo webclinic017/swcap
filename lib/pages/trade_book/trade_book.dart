@@ -69,12 +69,12 @@ class _TradeBookState extends State<TradeBook> {
            )
          ],
        ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AddTrade(userID: userID)));
-        },
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //       Navigator.push(context, MaterialPageRoute(builder: (context) => AddTrade(userID: userID)));
+      //   },
+      //   child: Icon(Icons.add),
+      // ),
       body: Container(
         width: double.infinity,
         child: FutureBuilder<TradeBookModel>(
@@ -83,22 +83,31 @@ class _TradeBookState extends State<TradeBook> {
             if(snapshot.hasData){
               if(snapshot.data.status){
                 return HorizontalDataTable(
-                  itemCount: snapshot.data.data.length,
-                  rightHandSideColBackgroundColor: AppConfig.kDeepDarkColor,
                     leftHandSideColBackgroundColor: AppConfig.kDeepDarkColor,
+                    rightHandSideColBackgroundColor: AppConfig.kDeepDarkColor,
+                    itemCount: snapshot.data.data.length,
                     leftHandSideColumnWidth: 100,
-                    headerWidgets: _getTitleWidget(),
-                    scrollPhysics: AlwaysScrollableScrollPhysics(),
+                    enablePullToRefresh: true,
+                    refreshIndicator: WaterDropHeader(),
+                    refreshIndicatorHeight: 60,
+                    rowSeparatorWidget: Divider(color: Colors.white,),
+                    htdRefreshController: HDTRefreshController(),
+                    onRefresh: () async {
+                      print("refreshed");
+                      HDTRefreshController().refreshCompleted();
+                    },
                     tableHeight: MediaQuery.of(context).size.height,
                     rightHandSideColumnWidth: MediaQuery.of(context).size.width * 2,
+                    isFixedHeader: true,
+                    headerWidgets: _getTitleWidget(),
                     leftSideItemBuilder: (context, index) {
                       var trade = snapshot.data.data[index];
                       return Container(
-                        child: Text(trade.scriptName , style: GoogleFonts.poppins(),),
+                        child: Text("${trade.scriptName}" , style: GoogleFonts.poppins(),),
                         width: 100,
                         height: 52,
                         padding: EdgeInsets.all(8),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                       );
                     },
                     rightSideItemBuilder: (context, index) {
@@ -128,10 +137,7 @@ class _TradeBookState extends State<TradeBook> {
   List<Widget> _getTitleWidget() {
     return [
       _getTitleItemWidget('Script', 100),
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: _getTitleItemWidget('Price', 100),
-      ),
+      _getTitleItemWidget('Price', 100),
       _getTitleItemWidget('Quantity', 100),
       _getTitleItemWidget('Type', 100),
       _getTitleItemWidget('Category', 100),
@@ -143,72 +149,71 @@ class _TradeBookState extends State<TradeBook> {
 
   Widget _getTitleItemWidget(String label, double width) {
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey
+      ),
       child: Text(label, style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
       width: width,
       height: 56,
       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
     );
   }
 
   Widget _generateRightHandSideColumnRow(BuildContext context,Datum script ,int index) {
 
     return Padding(
-      padding: const EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 0),
       child: Row(
         children: <Widget>[
           Container(
-            child: Row(
-              children: <Widget>[
-                Text("${script.price}" , style: GoogleFonts.poppins(),)
-              ],
-            ),
+            child: Text("${script.price}" , style: GoogleFonts.poppins(),),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
           Container(
             child: Text("${script.quantity}" ,style: GoogleFonts.poppins(),),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
           Container(
             child: Text("${script.buySell}" ,style: GoogleFonts.poppins(),),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
           Container(
             child: Text("${script.tradeCategory}" ,style: GoogleFonts.poppins(),),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
           Container(
             child: Text("${script.tradeDate}" ,style: GoogleFonts.poppins(),),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
           Container(
             child: Text("${script.tradeTime}" , style: GoogleFonts.poppins(),),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
           Container(
             child: Text("${script.tradeCreatedAt}" , style: GoogleFonts.poppins()),
             width: 100,
             height: 52,
             padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
           ),
         ],
       ),

@@ -51,8 +51,9 @@ class AppConfig {
           color: Colors.white,
         ),
         bodyText2: GoogleFonts.poppins(
-          color: Colors.white
-        )
+          color: Colors.white,
+          fontSize: 11
+        ),
       ),
       buttonTheme: ButtonThemeData(
         buttonColor: kMediumDarkColor,

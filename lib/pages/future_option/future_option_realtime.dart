@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swcap/api/kite_api.dart';
 import 'package:swcap/components/drawer/custom_drawer.dart';
 import 'package:swcap/config/app_config.dart';
@@ -21,16 +22,28 @@ class _FutureOptionRealTimeState extends State<FutureOptionRealTime> {
   StreamController<List> _streamController = StreamController();
   Timer _timer;
   double oldValue = 0;
+  String userID;
 
   @override
   void initState() {
-    getData();
+    getUserData();
     super.initState();
+  }
+
+  getUserData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    setState(() {
+      userID = pref.getString("userID");
+    });
+
+    getData();
+
   }
 
   getData() async {
 
-    final response = await KiteApi.getWatchLists("NFO");
+    final response = await KiteApi.getWatchLists("NFO" , userID);
     if(response.status){
       response.data.forEach((element) {
         _scripts.add({"script_name" : element.watchlistScriptName});
@@ -118,7 +131,7 @@ class _FutureOptionRealTimeState extends State<FutureOptionRealTime> {
 
 
 
-                      final response = await KiteApi.addWatchList(_scriptTextController.text , "NFO");
+                      final response = await KiteApi.addWatchList(_scriptTextController.text , "NFO" , userID);
 
                       if(response.status){
                         if(_scriptTextController.text.isNotEmpty){
@@ -184,7 +197,7 @@ class _FutureOptionRealTimeState extends State<FutureOptionRealTime> {
                           var script = snapshot.data[index]['script_name'];
                           return Container(
                             child: Text(script , style: GoogleFonts.poppins(),),
-                            width: 100,
+                            width: 140,
                             height: 60,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.centerLeft,

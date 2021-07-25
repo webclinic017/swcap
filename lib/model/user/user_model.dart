@@ -36,6 +36,13 @@ class Data {
     this.email,
     this.mobileNumber,
     this.password,
+    this.openingBalance,
+    this.deliveryMargin,
+    this.span,
+    this.exposure,
+    this.optionPremium,
+    this.showAccount,
+    this.isLoggedin,
     this.lastLogin,
     this.isActive,
     this.publicIp,
@@ -49,6 +56,13 @@ class Data {
   String email;
   String mobileNumber;
   String password;
+  String openingBalance;
+  String deliveryMargin;
+  String span;
+  String exposure;
+  String optionPremium;
+  String showAccount;
+  String isLoggedin;
   String lastLogin;
   String isActive;
   String publicIp;
@@ -62,6 +76,13 @@ class Data {
     email: json["email"],
     mobileNumber: json["mobile_number"],
     password: json["password"],
+    openingBalance: json["opening_balance"],
+    deliveryMargin: json["delivery_margin"],
+    span: json["span"],
+    exposure: json["exposure"],
+    optionPremium: json["option_premium"],
+    showAccount: json["show_account"],
+    isLoggedin: json["is_loggedin"],
     lastLogin: json["last_login"],
     isActive: json["is_active"],
     publicIp: json["public_ip"],
@@ -76,6 +97,13 @@ class Data {
     "email": email,
     "mobile_number": mobileNumber,
     "password": password,
+    "opening_balance": openingBalance,
+    "delivery_margin": deliveryMargin,
+    "span": span,
+    "exposure": exposure,
+    "option_premium": optionPremium,
+    "show_account": showAccount,
+    "is_loggedin": isLoggedin,
     "last_login": lastLogin,
     "is_active": isActive,
     "public_ip": publicIp,

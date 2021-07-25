@@ -44,12 +44,12 @@ class KiteApi {
 
   }
   
-  static Future<KiteWatchLIstModel> getWatchLists(scriptType) async {
+  static Future<KiteWatchLIstModel> getWatchLists(scriptType , userID) async {
     final client = http.Client();
     KiteWatchLIstModel thisResponse = KiteWatchLIstModel();
     try{
       
-      final response = await client.get(Uri.parse(ApiUrl.getWatchListApiUrl+"?script_type="+scriptType));
+      final response = await client.get(Uri.parse(ApiUrl.getWatchListApiUrl+"?script_type="+scriptType + "&user_id="+userID));
       if(response.statusCode == 200){
 
         if(jsonDecode(response.body)['status']){
@@ -77,7 +77,7 @@ class KiteApi {
     return thisResponse;
   }
   
-  static Future<GlobalModel> addWatchList(scriptName , scriptType) async {
+  static Future<GlobalModel> addWatchList(scriptName , scriptType , userID) async {
       final client = http.Client();
 
       GlobalModel thisResponse = GlobalModel();
@@ -86,7 +86,8 @@ class KiteApi {
         
         final response = await client.post(Uri.parse(ApiUrl.addWatchListApiUrl) , body: {
           "script_name" : scriptName,
-          "script_type" : scriptType
+          "script_type" : scriptType,
+          "user_id" : userID
         });
 
         if(response.statusCode == 200){

@@ -12,6 +12,7 @@ class UserConfig {
     pref.setString("userUserName", user.data.username);
     pref.setString("userPassword", user.data.password);
     pref.setString("userMobile", user.data.mobileNumber);
+    pref.setString("userShowAccount", user.data.showAccount);
 
   }
 
@@ -24,6 +25,7 @@ class UserConfig {
     pref.remove("userUserName");
     pref.remove("UserPassword");
     pref.remove("userMobile");
+    pref.remove("userShowAccount");
 
   }
 
